@@ -74,11 +74,11 @@ public final class ClaimConfig extends GlobalConfiguration {
 
         // To persist global configuration information,
         // set that to properties and call save().
-        sendEmails = formData.getBoolean("sendEmails");
-        stickyByDefault = formData.getBoolean("stickyByDefault");
-        propagateToFollowingBuildsByDefault = formData.getBoolean("propagateToFollowingBuildsByDefault");
-        sortUsersByFullName = formData.getBoolean("sortUsersByFullName");
-        blockAutoRefreshWhileClaiming = formData.getBoolean("blockAutoRefreshWhileClaiming");
+        sendEmails = formData.optBoolean("sendEmails", false);
+        stickyByDefault = formData.optBoolean("stickyByDefault", true);
+        propagateToFollowingBuildsByDefault = formData.optBoolean("propagateToFollowingBuildsByDefault", false);
+        sortUsersByFullName = formData.optBoolean("sortUsersByFullName", false);
+        blockAutoRefreshWhileClaiming = formData.optBoolean("blockAutoRefreshWhileClaiming", false);
         setGroovyTrigger(req.bindJSON(SecureGroovyScript.class, formData.getJSONObject("groovyTrigger")));
         save();
         return super.configure(req, formData);
